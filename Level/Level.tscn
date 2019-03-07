@@ -4,7 +4,7 @@
 [ext_resource path="res://Level/Background.png" type="Texture" id=2]
 [ext_resource path="res://Level/Combatants.gd" type="Script" id=3]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Level/HealthDisplay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Level/HealthDisplay/HealthDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=6]
 
 [sub_resource type="TileSet" id=1]
@@ -40,12 +40,13 @@ script = ExtResource( 3 )
 position = Vector2( 58, 64 )
 
 [node name="HealthDisplay" parent="Combatants/Player" instance=ExtResource( 5 )]
-position = Vector2( -21, -1 )
+position = Vector2( -5, 3.5 )
 
 [node name="Enemy" parent="Combatants" instance=ExtResource( 6 )]
 position = Vector2( 70, 64 )
 
 [node name="HealthDisplay" parent="Combatants/Enemy" instance=ExtResource( 5 )]
-position = Vector2( 0, -1 )
+position = Vector2( 5, 3.5 )
+team = 1
 
 [connection signal="on_attack" from="Combatants/Player" to="Combatants" method="_on_Player_on_attack"]
