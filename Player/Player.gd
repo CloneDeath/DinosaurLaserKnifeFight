@@ -3,6 +3,7 @@ extends Node2D
 signal on_attack(type);
 
 var stance = "mid";
+var health = 10;
 
 func on_attack(type):
 	emit_signal("on_attack", type);
