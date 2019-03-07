@@ -11,7 +11,7 @@ func _ready():
 
 		var scale = 1 if team == 1 else -1;
 		var x = i % 5;
-		var y = i / 5;
+		var y = int(i / 5.0);
 		h.position = Vector2(9 * x * scale, y * 4.5);
 		add_child(h);
 

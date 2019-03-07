@@ -1,17 +1,5 @@
-extends Node2D
+extends "res://Fighters/Fighter.gd"
 
-signal on_attack(type);
-
-#warning-ignore:unused_class_variable
-var stance = "mid";
-var health = 10;
-var max_health = 10;
-
-func on_attack(type):
-	emit_signal("on_attack", type);
-
-func damage():
-	health -= 1;
 
 func set_stance(new_stance):
 	stance = new_stance;
@@ -31,6 +19,3 @@ func attack():
 
 func is_attacking():
 	return $StateMachine.current_state == $StateMachine/Attacking;
-
-func stun():
-	$StateMachine.transition_to_state("Stun");
