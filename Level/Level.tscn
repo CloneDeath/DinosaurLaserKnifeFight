@@ -3,9 +3,11 @@
 [ext_resource path="res://Level/Terrain.png" type="Texture" id=1]
 [ext_resource path="res://Level/Background.png" type="Texture" id=2]
 [ext_resource path="res://Level/Combatants.gd" type="Script" id=3]
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Fighters/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Level/HealthDisplay/HealthDisplay.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Fighters/Enemy/Enemy.tscn" type="PackedScene" id=6]
+
+
 
 [sub_resource type="TileSet" id=1]
 0/name = "Terrain.png 0"
@@ -50,3 +52,4 @@ position = Vector2( 5, 3.5 )
 team = 1
 
 [connection signal="on_attack" from="Combatants/Player" to="Combatants" method="_on_Player_on_attack"]
+[connection signal="on_attack" from="Combatants/Enemy" to="Combatants" method="_on_Enemy_on_attack"]

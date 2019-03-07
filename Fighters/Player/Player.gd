@@ -7,6 +7,9 @@ var stance = "mid";
 var health = 10;
 var max_health = 10;
 
+func damage():
+	health -= 1;
+
 func on_attack(type):
 	emit_signal("on_attack", type);
 

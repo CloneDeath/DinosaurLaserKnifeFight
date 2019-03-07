@@ -5,3 +5,10 @@ func _on_Player_on_attack(type):
 		$Player.stun();
 	else:
 		$Enemy.damage();
+
+
+func _on_Enemy_on_attack(type):
+	if ($Player.stance == type):
+		$Enemy.stun();
+	else:
+		$Player.damage();
