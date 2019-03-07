@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Level/Terrain.png" type="Texture" id=1]
 [ext_resource path="res://Level/Background.png" type="Texture" id=2]
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Level/Combatants.gd" type="Script" id=3]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=5]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Terrain.png 0"
@@ -31,11 +32,13 @@ position = Vector2( 0, 16 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Players" type="Node2D" parent="."]
+[node name="Combatants" type="Node2D" parent="."]
+script = ExtResource( 3 )
 
-[node name="Player" parent="Players" instance=ExtResource( 3 )]
+[node name="Player" parent="Combatants" instance=ExtResource( 4 )]
 position = Vector2( 58, 64 )
 
-[node name="Enemy" parent="Players" instance=ExtResource( 4 )]
+[node name="Enemy" parent="Combatants" instance=ExtResource( 5 )]
 position = Vector2( 70, 64 )
 
+[connection signal="on_attack" from="Combatants/Player" to="Combatants" method="_on_Player_on_attack"]
