@@ -1,17 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Level/Terrain.png" type="Texture" id=1]
-[ext_resource path="res://Level/Background.png" type="Texture" id=2]
-[ext_resource path="res://Level/Combatants.gd" type="Script" id=3]
-[ext_resource path="res://Fighters/Player/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Level/HealthDisplay/HealthDisplay.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Fighters/Enemy/Enemy.tscn" type="PackedScene" id=6]
-
-
+[ext_resource path="res://Level/Level.gd" type="Script" id=1]
+[ext_resource path="res://Level/Terrain.png" type="Texture" id=2]
+[ext_resource path="res://Level/Background.png" type="Texture" id=3]
+[ext_resource path="res://Level/Combatants.gd" type="Script" id=4]
+[ext_resource path="res://Fighters/Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Level/HealthDisplay/HealthDisplay.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Fighters/Enemy/Enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Fighters/Hit.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Fighters/Stun.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Level/YouWin.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Level/YouLose.ogg" type="AudioStream" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Terrain.png 0"
-0/texture = ExtResource( 1 )
+0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 8, 8 )
@@ -21,7 +24,25 @@
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="Animation" id=2]
+resource_name = "you_win"
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "go_to_win_screen"
+} ]
+}
+
 [node name="Level" type="Node2D"]
+script = ExtResource( 1 )
 
 [node name="Background" type="TileMap" parent="."]
 editor/display_folded = true
@@ -32,24 +53,42 @@ tile_data = PoolIntArray( 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0
 
 [node name="Background" type="Sprite" parent="Background"]
 position = Vector2( 0, 16 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 centered = false
 
 [node name="Combatants" type="Node2D" parent="."]
-script = ExtResource( 3 )
+editor/display_folded = true
+script = ExtResource( 4 )
 
-[node name="Player" parent="Combatants" instance=ExtResource( 4 )]
+[node name="Player" parent="Combatants" instance=ExtResource( 5 )]
+editor/display_folded = true
 position = Vector2( 58, 64 )
 
-[node name="HealthDisplay" parent="Combatants/Player" instance=ExtResource( 5 )]
+[node name="HealthDisplay" parent="Combatants/Player" instance=ExtResource( 6 )]
 position = Vector2( -5, 3.5 )
 
-[node name="Enemy" parent="Combatants" instance=ExtResource( 6 )]
+[node name="Enemy" parent="Combatants" instance=ExtResource( 7 )]
+editor/display_folded = true
 position = Vector2( 70, 64 )
 
-[node name="HealthDisplay" parent="Combatants/Enemy" instance=ExtResource( 5 )]
+[node name="HealthDisplay" parent="Combatants/Enemy" instance=ExtResource( 6 )]
 position = Vector2( 5, 3.5 )
 team = 1
+
+[node name="HitAudio" type="AudioStreamPlayer" parent="Combatants"]
+stream = ExtResource( 8 )
+
+[node name="StunAudio" type="AudioStreamPlayer" parent="Combatants"]
+stream = ExtResource( 9 )
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+anims/you_win = SubResource( 2 )
+
+[node name="YouWinAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="YouLoseAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
 
 [connection signal="on_attack" from="Combatants/Player" to="Combatants" method="_on_Player_on_attack"]
 [connection signal="on_attack" from="Combatants/Enemy" to="Combatants" method="_on_Enemy_on_attack"]

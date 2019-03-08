@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Continue.ogg-5d158c4216dc663290cb7994cd58e679.oggstr"
+
+[deps]
+
+source_file="res://Menu/End/Continue.ogg"
+dest_files=[ "res://.import/Continue.ogg-5d158c4216dc663290cb7994cd58e679.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Menu/Controls/Controls.gd" type="Script" id=1]
 [ext_resource path="res://Menu/Controls/Keyboard.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Fighters/Player/Player.png" type="Texture" id=4]
 [ext_resource path="res://Level/Background.png" type="Texture" id=5]
 [ext_resource path="res://Level/Terrain.png" type="Texture" id=6]
+[ext_resource path="res://Menu/Confirm.ogg" type="AudioStream" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "tutorial"
@@ -65,6 +66,18 @@ tracks/0/keys = {
 "method": "go_to_fight"
 } ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="Controls" type="Node2D"]
 script = ExtResource( 1 )
@@ -114,4 +127,7 @@ anims/tutorial = SubResource( 1 )
 
 [node name="Continue" type="AnimationPlayer" parent="."]
 anims/continue = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 
