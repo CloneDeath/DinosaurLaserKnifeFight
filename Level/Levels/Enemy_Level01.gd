@@ -3,6 +3,7 @@ extends "res://Fighters/Enemy/Enemy.gd"
 var remaining = 0.7;
 
 func _process(delta):
+	if (is_stunned()): return;
 	if (is_attacking()): return;
 	remaining -= delta;
 	if (remaining <= 0):

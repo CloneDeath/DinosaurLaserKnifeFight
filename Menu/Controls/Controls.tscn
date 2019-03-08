@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Menu/Controls/Controls.gd" type="Script" id=1]
+[ext_resource path="res://Menu/Controls/Keyboard.png" type="Texture" id=2]
+[ext_resource path="res://Menu/Controls/Controller.png" type="Texture" id=3]
+[ext_resource path="res://Fighters/Player/Player.png" type="Texture" id=4]
+[ext_resource path="res://Level/Background.png" type="Texture" id=5]
+[ext_resource path="res://Level/Terrain.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "tutorial"
+length = 15.0
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.2, 9.3, 9.5, 10, 10.5, 11, 11.5, 11.7, 11.8, 12, 12.5, 13, 13.5, 13.7, 13.8, 14, 14.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0, 1, 4, 5, 4, 5, 0, 1, 0, 9, 8, 9, 8, 1, 0, 1, 2, 3, 0, 1, 0, 1, 4, 6, 7, 5, 4, 1, 8, 10, 11, 9, 8, 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Keyboard:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 4, 5.5, 7.5, 9, 10, 11, 11.5, 12, 12.5, 13, 13.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0, 2, 0, 3, 0, 1, 4, 1, 0, 2, 5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Controller:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2, 4, 5.5, 7.5, 9, 10, 11, 11.5, 12, 12.5, 13, 13.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0, 2, 0, 3, 0, 1, 4, 1, 0, 2, 5 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "continue"
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "go_to_fight"
+} ]
+}
+
+[node name="Controls" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Keyboard" type="Sprite" parent="."]
+position = Vector2( 40, 56 )
+texture = ExtResource( 2 )
+hframes = 6
+frame = 5
+
+[node name="Controller" type="Sprite" parent="."]
+position = Vector2( 100, 56 )
+texture = ExtResource( 3 )
+hframes = 6
+frame = 5
+
+[node name="Player" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 71, 24 )
+texture = ExtResource( 4 )
+hframes = 13
+frame = 9
+
+[node name="Background" type="Sprite" parent="Player"]
+position = Vector2( -16, -17 )
+z_index = -1
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 5, 17, 23, 50 )
+
+[node name="Terrain" type="Sprite" parent="Player"]
+position = Vector2( -12, 20 )
+texture = ExtResource( 6 )
+
+[node name="Terrain2" type="Sprite" parent="Player"]
+position = Vector2( -4, 20 )
+texture = ExtResource( 6 )
+
+[node name="Terrain3" type="Sprite" parent="Player"]
+position = Vector2( 4, 20 )
+texture = ExtResource( 6 )
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+autoplay = "tutorial"
+anims/tutorial = SubResource( 1 )
+
+[node name="Continue" type="AnimationPlayer" parent="."]
+anims/continue = SubResource( 2 )
+
